@@ -1,0 +1,63 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="myblog.css"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" type="text/css">
+</head>
+<body>
+
+    <div id="demo"></div>
+    <!-- <div class="blog">
+        <div class="date">12 november 2023</div>
+        <h2>This is my first blog</h2>
+        <p class="paragraph">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate odio id necessitatibus laboriosam! Porro eveniet ea hic amet vero, ad earum minima sed dolor, consectetur quibusdam quo rem cupiditate! Tempora?
+        </p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, aut. Tenetur quod nobis, omnis facilis fuga voluptate provident sequi temporibus qui? Expedita fugit similique repellendus eaque omnis repudiandae molestiae quo!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et rem magni dolore nemo? Eveniet cumque est pariatur provident a, dolor accusamus voluptatem eligendi blanditiis nemo accusantium dolorem tempora, incidunt laboriosam?</p>
+        <hr>
+    </div> -->
+    <script>
+  let token = localStorage.getItem("token");
+ 
+      fetch("http://localhost:3000/api/get-blog", {
+          method: "get",
+          headers: {
+              authorization: `Bearer ${token}`
+          }
+      })
+      .then(res => res.json())
+      .then(data => {
+        
+        console.log(data.msg);
+        if(data.msg){
+          demo.innerHTML =data.msg
+          return;
+        }
+        data.forEach(item=>{
+          let content =
+              `<div class="blogs">
+              <div class="content"><p>${item.title}</p></div>
+              <div class="content"><p>${item.description}</p></div>
+                <div class="images"><img src="${item.profile}" />
+                </div>
+              </div>`;
+            document.getElementById("demo").innerHTML += content;
+
+
+
+
+        })
+      })
+ 
+      </script>
+</body>
+</html> 
+
+
+
+
+
