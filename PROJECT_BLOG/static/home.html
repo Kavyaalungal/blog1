@@ -32,93 +32,47 @@
         </div>
     </header>
 
-    <!-- blog section -->
-    <!-- <section class="blogs-section">
-        <div class="blog-card">
-            <img src="img/header.png" class="blog-image" alt="">
-            <h1 class="blog-title">Lorem ipsum dolor sit amet consectetur.</h1>
-            <p class="blog-overview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt incidunt fugiat quos porro repellat harum. Adipisci tempora corporis rem cum.</p>
-            <a href="/" class="btn dark">read</a>
-        </div>
-    </section>
-    <body>
-        <img  alt="profile image" id="profile">
-        <p id="username"></p>
-        <script>
-            let username = document.getElementById("username");
-            let profile = document.getElementById("profile");
+    <!-- <section class="blog-section"></section>
     
-            fetch("http://localhost:3000/api/get-profile")
-            .then(res=>res.json())
-            .then(data=>{
-                console.log(data);
-                username.textContent = data[0].username;
-                profile.src = data[4].profile
-            })
-        </script>
-    </body> -->
-
-    <section class="blogs-section">
-        <div class="blog-card">
-            <!-- Display the uploaded image here -->
-            <img src="" class="blog-image" alt="Uploaded Image">
-
-            <!-- Display the description title here -->
-            <h1 class="blog-title"></h1>
-
-            <!-- Display the profile image here -->
-            <!-- <img src="" class="profile-image" alt="Profile Image"> -->
-
-            <!-- Existing blog overview content -->
-            <p class="blog-overview"></p>
-
-            <a href="/" class="btn dark">read</a>
-        </div>
-    </section>
-
-
     <script>
-         let token = localStorage.getItem("token");
-        let username = document.getElementById("username");
-        let profile = document.getElementById("profile");
-        let blogImage = document.querySelector(".blog-image");
-        let blogTitle = document.querySelector(".blog-title");
-        let blogOverview = document.querySelector(".blog-overview");
+      fetch("http://localhost:3000/api/get-file")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          data.forEach((item) => {
+            console.log(item);
+            let content =
+            `<section class="blog-section">
+            <div class="blog-card">
+                <img src="${item.file}" class="blog-image" alt="uploaded image" />
+                <h1 class="blog-title">${item.title}</h1>
+                <p class="blog-description">${item.description}</p>
+                <a href="/" class="btn dark">Read</a>
+            </div>
+            </section>
+            `;
+            document.querySelector(".blog-section").innerHTML += content;
+          });
+        });
+    </script> -->
 
-        fetch("http://localhost:3000/api/get-blog")
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            blogImage.src = data[0].uploadedImage;
-            blogTitle.textContent = data[0].descriptionTitle;
-            blogOverview.textContent = data[0].blogOverview;
-        })
-
-        fetch("http://localhost:3000/api/get-blog",{
-                method:"get",
-                headers:{
-                    authorization:`Bearer ${token}`
-                }
-            })
-            .then(res => res.json())
-            .then(data =>{
-                div.innerHTML = "";
-                if(data.msg){
-                    div.innerHTML = data.msg;
-                    return;
-                }
-                data.forEach(item =>{
-                    let li = `<li>${item.note}</li>`;
-                    notes.innerHTML += li;
-                })
-            })
-            
+    <div id="demo"></div>
+    <script>
+     
+      fetch("http://localhost:3000/api/get-file")
+        .then((res) => res.json())
+        .then((data) => {
         
-        profile()
-    </script>
+          console.log(data);
+          data.forEach((item) => {
+            console.log(item);
+            let content =
+              `<div><p>${item.title}</p><p>${item.description}</p><img src="${item.file}" /></div>`;
+            document.getElementById("demo").innerHTML += content;
+          });
 
-  
- 
-    
+          
+        });
+    </script>
 </body>
 </html>

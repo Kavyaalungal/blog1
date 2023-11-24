@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="myblog.css"> -->
+    <link rel="stylesheet" href="myblog.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" type="text/css">
 </head>
 <body>
@@ -42,7 +42,7 @@
               `<div class="blogs">
               <div class="content"><p>${item.title}</p></div>
               <div class="content"><p>${item.description}</p></div>
-                <div class="images"><img src="${item.profile}" />
+                <div class="images"><img src="${item.file}" />
                 </div>
               </div>`;
             document.getElementById("demo").innerHTML += content;

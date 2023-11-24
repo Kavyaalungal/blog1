@@ -83,9 +83,9 @@ export async function addBlog(req,res){
            
          
         })
-        if(result){
+         if(result){
            return res.json(" added successfully");
-        }
+         }
         return res.json("error in uploading")
         
     }
@@ -95,6 +95,26 @@ export async function addBlog(req,res){
     }
  }
 
+
+
+
+
+ export async function  getBlog(req,res){
+    try{
+        let { id } = req.user;
+        let result=await blogSchema.find({userId:id});
+        console.log(result)
+        if(result.length > 0){
+            return res.status(200).send(result)
+
+        }
+        return res.status(200).send({msg:"No Blog to show"})
+    }
+    catch(error){
+        console.log(error)
+        return res.status(500).send("Error occured")
+    }
+ }
 
 export async function profile(req,res){
     try{
@@ -112,20 +132,12 @@ let userDetails = await userSchema.findOne({ _id: user.id }, { password: 0, _id:
     }
  }
 
-
- export async function  getBlog(req,res){
-    try{
-        let {id}=req.user;
-        let result=await blogSchema.find({userId:id});
-        console.log(result)
-        if(result.length > 0){
-            return res.status(200).send(result)
-
-        }
-        return res.status(200).send({msg:"No Blog to show"})
-    }
-    catch(error){
+ export async function  getfile(req,res){
+    try {
+        let data=await blogSchema.find();
+        return res.json(data)
+    } catch (error) {
         console.log(error)
-        return res.status(500).send("Error occured")
+        return res.status(500).send("error occured")
     }
- }
+}
